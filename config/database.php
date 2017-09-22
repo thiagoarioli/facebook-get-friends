@@ -79,11 +79,11 @@ return [
         ],
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('DB_HOST', '54.94.185.144'),
-            'port'     => env('DB_PORT', 27017),
-            'database' => env('DB_DATABASE', 'bellbot'),
-            'username' => env('DB_USERNAME', 'bellbot'),
-            'password' => env('DB_PASSWORD', 'Hero30888899'),
+            'host'     => env('DB_HOST'),
+            'port'     => env('DB_PORT'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'options'  => [
                 'database' => 'bellbot' // sets the authentication database required by mongo 3
             ]
