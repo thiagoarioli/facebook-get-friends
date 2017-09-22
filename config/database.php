@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +76,17 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+        ],
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('DB_HOST', '54.94.185.144'),
+            'port'     => env('DB_PORT', 27017),
+            'database' => env('DB_DATABASE', 'bellbot'),
+            'username' => env('DB_USERNAME', 'bellbot'),
+            'password' => env('DB_PASSWORD', 'Hero30888899'),
+            'options'  => [
+                'database' => 'bellbot' // sets the authentication database required by mongo 3
+            ]
         ],
 
     ],

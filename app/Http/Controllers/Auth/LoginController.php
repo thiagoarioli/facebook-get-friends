@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Person;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
@@ -11,6 +12,7 @@ use Facebook\FacebookRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Config;
 use Socialite;
 
@@ -99,10 +101,9 @@ class LoginController extends Controller
         }
 
         echo count($allFriends);
-        foreach ($allFriends as $status) {
-            var_dump($status);
-        }
 
+        $person = new Person();
+        $person->insertMany($allFriends);
 
         dd($user);
     }
