@@ -75,6 +75,7 @@ class LoginController extends Controller
         try {
             // Requires the "read_stream" permission
             $response = $fb->get("/{$user->id}/taggable_friends?fields=name,picture.width(720).height(720),limit=200", $user->token);
+            $friends = $response->getGraphEdge();
         } catch(FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -84,16 +85,22 @@ class LoginController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-        $nextFeed = $response->getGraphEdge();
+        $allFriends = [];
 
-        foreach ($nextFeed as $status) {
-            var_dump($status->asArray());
+        if($fb->next($friends)){
+            $friendsArray = $friends->asArray();
+            $allFriends = array_merge($friendsArray, $allFriends);
+            while ($friends = $fb->next($friends)){
+                $friendsArray = $friends->asArray();
+                $allFriends = array_merge($friendsArray, $allFriends);
+            }
+        }else{
+            $allFriends = $friends->asArray();
         }
 
-        while ($nextFeed = $fb->next($nextFeed)) {
-            foreach ($nextFeed as $status) {
-                var_dump($status->asArray());
-            }
+        echo count($allFriends);
+        foreach ($allFriends as $status) {
+            var_dump($status);
         }
 
 
